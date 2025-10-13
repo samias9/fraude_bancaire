@@ -91,7 +91,7 @@ Fraude_bancaire/
 │  ├─ train_transaction.csv, train_identity.csv, ...
 ├─ Exploration_et_nettoyage_des_données_fraudes.ipynb
 ├─ Visualisation_et_modeling.ipynb
-├─ powerbi_export.ipynb
+├─ Powerbi_export.ipynb
 ├─ Exploration_et_nettoyage_des_données_fraudes.ipynb
 ├─ df_train_encoded.pkl
 ├─ df_train_reduced.pkl

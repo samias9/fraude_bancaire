@@ -1,0 +1,26 @@
+# Datasets 
+*.csv
+data/
+reduced_data/
+train_transaction.csv
+test_transaction.csv
+
+# Power BI
+powerbi_data/
+
+# Modèles entraînés (lourds)
+*.pkl
+*.joblib
+models/
+
+# Notebooks temporaires
+.ipynb_checkpoints/
+__pycache__/
+
+# label mapping
+label_mappings.json
+
+# Environnement
+venv/
+env/
+.env.DS_Store

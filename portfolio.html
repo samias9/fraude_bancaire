@@ -1,0 +1,513 @@
+import React, { useState } from 'react';
+import { BarChart3, Database, TrendingUp, AlertTriangle, CheckCircle, FileText, Code, Brain } from 'lucide-react';
+
+const DataAnalysisPortfolio = () => {
+  const [activeTab, setActiveTab] = useState('overview');
+
+  const tabs = [
+    { id: 'overview', label: 'Vue d\'ensemble', icon: FileText },
+    { id: 'technical', label: 'Détails Techniques', icon: Code },
+    { id: 'results', label: 'Résultats & Impact', icon: TrendingUp },
+    { id: 'skills', label: 'Compétences', icon: Brain }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="bg-white rounded-xl shadow-lg p-8 mb-6">
+          <div className="flex items-start justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-slate-900 mb-2">
+                Système de Détection de Fraudes Bancaires
+              </h1>
+              <p className="text-lg text-slate-600 mb-4">
+                Modèle de Machine Learning pour la détection précoce de transactions frauduleuses
+              </p>
+              <div className="flex gap-3 flex-wrap">
+                <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+                  Python
+                </span>
+                <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
+                  Machine Learning
+                </span>
+                <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
+                  XGBoost
+                </span>
+                <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">
+                  Data Analytics
+                </span>
+              </div>
+            </div>
+            <Database className="w-16 h-16 text-blue-600" />
+          </div>
+        </div>
+
+        {/* Navigation Tabs */}
+        <div className="bg-white rounded-xl shadow-lg mb-6 p-2">
+          <div className="flex gap-2 flex-wrap">
+            {tabs.map(tab => {
+              const Icon = tab.icon;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-all ${
+                    activeTab === tab.id
+                      ? 'bg-blue-600 text-white shadow-md'
+                      : 'text-slate-600 hover:bg-slate-100'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span className="font-medium">{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="bg-white rounded-xl shadow-lg p-8">
+          {activeTab === 'overview' && (
+            <div className="space-y-6">
+              <section>
+                <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                  <AlertTriangle className="w-6 h-6 text-orange-600" />
+                  Contexte & Objectif Business
+                </h2>
+                <div className="bg-slate-50 p-6 rounded-lg">
+                  <p className="text-slate-700 leading-relaxed mb-4">
+                    Dans le contexte bancaire, la détection précoce des fraudes est cruciale pour protéger 
+                    les clients et minimiser les pertes financières. Ce projet propose un système automatisé 
+                    de détection basé sur l'analyse de plus de 590,000 transactions.
+                  </p>
+                  <div className="grid md:grid-cols-2 gap-4 mt-4">
+                    <div className="bg-white p-4 rounded-lg border-l-4 border-blue-600">
+                      <h3 className="font-semibold text-slate-900 mb-2">Objectif Principal</h3>
+                      <p className="text-slate-600 text-sm">
+                        Maximiser le rappel (détecter un maximum de fraudes) tout en maintenant 
+                        une précision acceptable pour limiter les fausses alertes
+                      </p>
+                    </div>
+                    <div className="bg-white p-4 rounded-lg border-l-4 border-green-600">
+                      <h3 className="font-semibold text-slate-900 mb-2">Défi Majeur</h3>
+                      <p className="text-slate-600 text-sm">
+                        Déséquilibre de classes extrême : 96.5% transactions légitimes vs 3.5% fraudes
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                  <Database className="w-6 h-6 text-blue-600" />
+                  Données & Méthodologie
+                </h2>
+                <div className="grid md:grid-cols-3 gap-4">
+                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-lg">
+                    <div className="text-3xl font-bold text-blue-700 mb-2">590K+</div>
+                    <div className="text-slate-700 font-medium">Transactions analysées</div>
+                  </div>
+                  <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-5 rounded-lg">
+                    <div className="text-3xl font-bold text-purple-700 mb-2">100+</div>
+                    <div className="text-slate-700 font-medium">Features traitées</div>
+                  </div>
+                  <div className="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-lg">
+                    <div className="text-3xl font-bold text-green-700 mb-2">3 mois</div>
+                    <div className="text-slate-700 font-medium">Durée du projet</div>
+                  </div>
+                </div>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-slate-900 mb-4">Pipeline de Développement</h2>
+                <div className="space-y-3">
+                  {[
+                    { step: 1, title: 'Exploration & Nettoyage', desc: 'Analyse exploratoire, traitement des valeurs manquantes, corrélations' },
+                    { step: 2, title: 'Feature Engineering', desc: 'Sélection de variables, réduction dimensionnelle, création de features' },
+                    { step: 3, title: 'Gestion du Déséquilibre', desc: 'SMOTE (oversampling synthétique) avec ratio 0.5' },
+                    { step: 4, title: 'Modélisation', desc: 'Test Random Forest vs XGBoost, optimisation hyperparamètres' },
+                    { step: 5, title: 'Optimisation', desc: 'Ajustement seuil de décision (0.4), tuning du modèle final' },
+                    { step: 6, title: 'Évaluation', desc: 'Validation avec métriques business (Precision/Recall/F1)' }
+                  ].map(item => (
+                    <div key={item.step} className="flex gap-4 items-start bg-slate-50 p-4 rounded-lg">
+                      <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
+                        {item.step}
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-slate-900">{item.title}</h3>
+                        <p className="text-slate-600 text-sm mt-1">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </div>
+          )}
+
+          {activeTab === 'technical' && (
+            <div className="space-y-6">
+              <section>
+                <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                  <Code className="w-6 h-6 text-blue-600" />
+                  Stack Technique
+                </h2>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-slate-50 p-5 rounded-lg">
+                    <h3 className="font-semibold text-slate-900 mb-3">Technologies Utilisées</h3>
+                    <ul className="space-y-2 text-slate-700">
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-600" />
+                        <span><strong>Python 3.8+</strong> - Langage principal</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-600" />
+                        <span><strong>Pandas/NumPy</strong> - Manipulation de données</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-600" />
+                        <span><strong>Scikit-learn</strong> - Preprocessing & métriques</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-600" />
+                        <span><strong>XGBoost</strong> - Modèle de classification</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-600" />
+                        <span><strong>Imbalanced-learn</strong> - SMOTE</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-600" />
+                        <span><strong>Matplotlib/Seaborn</strong> - Visualisations</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="bg-slate-50 p-5 rounded-lg">
+                    <h3 className="font-semibold text-slate-900 mb-3">Hyperparamètres XGBoost</h3>
+                    <div className="bg-slate-900 text-green-400 p-4 rounded font-mono text-sm">
+                      <div>n_estimators: 200</div>
+                      <div>max_depth: 8</div>
+                      <div>learning_rate: 0.1</div>
+                      <div>scale_pos_weight: 2.0</div>
+                      <div>eval_metric: 'aucpr'</div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-slate-900 mb-4">Techniques Avancées</h2>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-blue-50 p-5 rounded-lg border-l-4 border-blue-600">
+                    <h3 className="font-semibold text-blue-900 mb-2">Gestion du Déséquilibre</h3>
+                    <ul className="space-y-2 text-slate-700 text-sm">
+                      <li>• SMOTE (Synthetic Minority Over-sampling)</li>
+                      <li>• Ratio d'oversampling: 0.5</li>
+                      <li>• Pondération de classe (scale_pos_weight)</li>
+                      <li>• Stratification lors du split train/test</li>
+                    </ul>
+                  </div>
+                  <div className="bg-purple-50 p-5 rounded-lg border-l-4 border-purple-600">
+                    <h3 className="font-semibold text-purple-900 mb-2">Optimisation du Modèle</h3>
+                    <ul className="space-y-2 text-slate-700 text-sm">
+                      <li>• Seuil de décision ajusté: 0.4 (vs 0.5)</li>
+                      <li>• Feature selection basée sur corrélations</li>
+                      <li>• Réduction dimensionnelle (100 features)</li>
+                      <li>• Validation croisée stratifiée</li>
+                    </ul>
+                  </div>
+                </div>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-slate-900 mb-4">Pourquoi XGBoost > Random Forest?</h2>
+                <div className="bg-green-50 p-6 rounded-lg border border-green-200">
+                  <div className="grid md:grid-cols-3 gap-4">
+                    <div>
+                      <h4 className="font-semibold text-green-900 mb-2">Gradient Boosting</h4>
+                      <p className="text-slate-700 text-sm">Optimisation itérative plus efficace</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-green-900 mb-2">Régularisation</h4>
+                      <p className="text-slate-700 text-sm">Protection contre l'overfitting</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-green-900 mb-2">Performance</h4>
+                      <p className="text-slate-700 text-sm">Meilleur sur données déséquilibrées</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          )}
+
+          {activeTab === 'results' && (
+            <div className="space-y-6">
+              <section>
+                <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                  <TrendingUp className="w-6 h-6 text-green-600" />
+                  Résultats Clés
+                </h2>
+                <div className="grid md:grid-cols-3 gap-4 mb-6">
+                  <div className="bg-gradient-to-br from-green-500 to-green-600 text-white p-6 rounded-xl shadow-lg">
+                    <div className="text-4xl font-bold mb-2">74%</div>
+                    <div className="text-green-100 font-medium mb-1">Précision</div>
+                    <div className="text-sm text-green-50">7-8 vraies fraudes sur 10 alertes</div>
+                  </div>
+                  <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-xl shadow-lg">
+                    <div className="text-4xl font-bold mb-2">63%</div>
+                    <div className="text-blue-100 font-medium mb-1">Rappel</div>
+                    <div className="text-sm text-blue-50">2/3 des fraudes détectées</div>
+                  </div>
+                  <div className="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-6 rounded-xl shadow-lg">
+                    <div className="text-4xl font-bold mb-2">0.68</div>
+                    <div className="text-purple-100 font-medium mb-1">F1-Score</div>
+                    <div className="text-sm text-purple-50">Excellent équilibre</div>
+                  </div>
+                </div>
+
+                <div className="bg-slate-50 p-6 rounded-lg">
+                  <h3 className="font-semibold text-slate-900 mb-4">Matrice de Confusion (Validation)</h3>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-center">
+                      <thead>
+                        <tr className="bg-slate-200">
+                          <th className="p-3 border border-slate-300"></th>
+                          <th className="p-3 border border-slate-300 font-semibold">Prédit Légitime</th>
+                          <th className="p-3 border border-slate-300 font-semibold">Prédit Fraude</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="p-3 border border-slate-300 font-semibold bg-slate-200">Réel Légitime</td>
+                          <td className="p-3 border border-slate-300 bg-green-100 font-bold text-green-800">113,056</td>
+                          <td className="p-3 border border-slate-300 bg-red-100 font-bold text-red-800">919</td>
+                        </tr>
+                        <tr>
+                          <td className="p-3 border border-slate-300 font-semibold bg-slate-200">Réel Fraude</td>
+                          <td className="p-3 border border-slate-300 bg-red-100 font-bold text-red-800">1,529</td>
+                          <td className="p-3 border border-slate-300 bg-green-100 font-bold text-green-800">2,604</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-slate-900 mb-4">Impact Business</h2>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-green-50 p-5 rounded-lg border-l-4 border-green-600">
+                    <h3 className="font-semibold text-green-900 mb-3 flex items-center gap-2">
+                      <CheckCircle className="w-5 h-5" />
+                      Améliorations vs Baseline
+                    </h3>
+                    <ul className="space-y-2 text-slate-700">
+                      <li>• <strong>+133% de rappel</strong> (27% → 63%)</li>
+                      <li>• <strong>-88% de fausses alertes</strong> (vs Random Forest)</li>
+                      <li>• <strong>98% d'exactitude globale</strong></li>
+                    </ul>
+                  </div>
+                  <div className="bg-blue-50 p-5 rounded-lg border-l-4 border-blue-600">
+                    <h3 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
+                      <BarChart3 className="w-5 h-5" />
+                      Valeur Ajoutée
+                    </h3>
+                    <ul className="space-y-2 text-slate-700">
+                      <li>• Réduction des pertes financières</li>
+                      <li>• Diminution de la charge d'investigation</li>
+                      <li>• Amélioration de l'expérience client</li>
+                    </ul>
+                  </div>
+                </div>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-slate-900 mb-4">Analyse Seuil de Décision</h2>
+                <div className="bg-slate-50 p-6 rounded-lg">
+                  <p className="text-slate-700 mb-4">
+                    L'optimisation du seuil de décision permet d'ajuster le trade-off entre précision et rappel 
+                    selon les besoins business :
+                  </p>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-4 p-3 bg-white rounded">
+                      <div className="font-mono font-bold text-slate-900">0.3</div>
+                      <div className="flex-1">
+                        <div className="text-sm text-slate-600">Rappel: 71% | Précision: 62%</div>
+                        <div className="text-xs text-slate-500">Plus de fraudes détectées, plus de fausses alertes</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4 p-3 bg-green-100 rounded border-2 border-green-500">
+                      <div className="font-mono font-bold text-green-900">0.4 ✓</div>
+                      <div className="flex-1">
+                        <div className="text-sm text-green-900 font-semibold">Rappel: 63% | Précision: 74%</div>
+                        <div className="text-xs text-green-700">Seuil optimal - Meilleur compromis</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4 p-3 bg-white rounded">
+                      <div className="font-mono font-bold text-slate-900">0.5</div>
+                      <div className="flex-1">
+                        <div className="text-sm text-slate-600">Rappel: 45% | Précision: 80%</div>
+                        <div className="text-xs text-slate-500">Moins de fausses alertes, mais fraudes manquées</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          )}
+
+          {activeTab === 'skills' && (
+            <div className="space-y-6">
+              <section>
+                <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                  <Brain className="w-6 h-6 text-purple-600" />
+                  Compétences Démontrées
+                </h2>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {[
+                    {
+                      category: 'Data Analysis & Engineering',
+                      color: 'blue',
+                      skills: [
+                        'Analyse exploratoire de données (EDA)',
+                        'Feature engineering & sélection',
+                        'Data preprocessing & cleaning',
+                        'Gestion de données déséquilibrées',
+                        'Réduction dimensionnelle'
+                      ]
+                    },
+                    {
+                      category: 'Machine Learning',
+                      color: 'green',
+                      skills: [
+                        'Classification supervisée',
+                        'XGBoost & ensemble methods',
+                        'Hyperparameter tuning',
+                        'Model evaluation & validation',
+                        'SMOTE & resampling techniques'
+                      ]
+                    },
+                    {
+                      category: 'Programming & Tools',
+                      color: 'purple',
+                      skills: [
+                        'Python (Pandas, NumPy, Scikit-learn)',
+                        'SQL pour requêtes de données',
+                        'Version control (Git/GitHub)',
+                        'Jupyter Notebooks',
+                        'Data visualization (Matplotlib, Seaborn)'
+                      ]
+                    },
+                    {
+                      category: 'Business & Communication',
+                      color: 'orange',
+                      skills: [
+                        'Compréhension des enjeux business',
+                        'Trade-off coûts vs bénéfices',
+                        'Documentation technique',
+                        'Présentation de résultats',
+                        'Métriques orientées métier'
+                      ]
+                    }
+                  ].map(section => (
+                    <div key={section.category} className={`bg-${section.color}-50 p-5 rounded-lg border-l-4 border-${section.color}-600`}>
+                      <h3 className={`font-semibold text-${section.color}-900 mb-3`}>{section.category}</h3>
+                      <ul className="space-y-2">
+                        {section.skills.map((skill, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-slate-700 text-sm">
+                            <CheckCircle className={`w-4 h-4 text-${section.color}-600 flex-shrink-0 mt-0.5`} />
+                            <span>{skill}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-slate-900 mb-4">Alignement avec le Poste Banque Scotia</h2>
+                <div className="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg border border-red-200">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h3 className="font-semibold text-red-900 mb-3">Exigences du Poste</h3>
+                      <ul className="space-y-2 text-slate-700 text-sm">
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-green-600" />
+                          <span>Proficiency with data platforms ✓</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-green-600" />
+                          <span>SQL & data processing ✓</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-green-600" />
+                          <span>Asset management data domains ✓</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-green-600" />
+                          <span>Analytical & problem-solving ✓</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-red-900 mb-3">Ce Projet Démontre</h3>
+                      <ul className="space-y-2 text-slate-700 text-sm">
+                        <li>• Gestion de large datasets (590K+ transactions)</li>
+                        <li>• Pipeline complet de traitement de données</li>
+                        <li>• Documentation technique rigoureuse</li>
+                        <li>• Approche orientée business & résultats</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-slate-900 mb-4">Ressources & Code Source</h2>
+                <div className="flex gap-4 flex-wrap">
+                  <a 
+                    href="https://github.com/samias9/fraude_bancaire" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors font-medium"
+                  >
+                    <Code className="w-5 h-5" />
+                    Voir le Code sur GitHub
+                  </a>
+                  <a 
+                    href="https://www.linkedin.com/in/samia-carchaf-ia/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                  >
+                    LinkedIn Profile
+                  </a>
+                </div>
+              </section>
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="mt-6 bg-white rounded-xl shadow-lg p-6">
+          <div className="text-center">
+            <p className="text-slate-600 mb-2">
+              <strong>Samia CARCHAF</strong> • Data Analyst & Machine Learning Engineer
+            </p>
+            <p className="text-slate-500 text-sm">
+              samia.carchaf@gmail.com • 
+              <a href="https://carchaf-portfolio.netlify.app/" className="text-blue-600 hover:underline ml-1" target="_blank" rel="noopener noreferrer">
+                Portfolio
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default DataAnalysisPortfolio;
